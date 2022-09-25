@@ -11,7 +11,7 @@ const refs = {
   countryInfoDiv: document.querySelector('.country-info'),
 };
 
-refs.searchInput.addEventListener('input', debounce(onInput, 300));
+refs.searchInput.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput() {
   const searchName = String(refs.searchInput.value);
@@ -43,7 +43,7 @@ function clearCountryContainer() {
   function makeMarkupCountires(countries = []) {
     clearCountryContainer();
     const markupCounries = countries
-      .map(country => {
+      .map(({flag: {svg}, name: {official}}) => {
         return `
           <li class="country-list__item">
             <img class="country-list__icon" width="40px" height="30px"
